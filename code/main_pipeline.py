@@ -468,7 +468,7 @@ class ALNSRunner:
     def objective(self, makespan, total_wait):
         # scalarization used inside ALNS acceptance; consistent with pipeline outputs
         return makespan + LAMBDA_WAIT * total_wait
-        def run(self, iters=ALNS_ITERS):
+    def run(self, iters=ALNS_ITERS):
         mk, tw, _ = simulate(self.inst, self.P, self.R, self.cur, sync=True, congestion=True)
         cur_val = self.objective(mk, tw)
 
