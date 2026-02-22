@@ -24,29 +24,29 @@ pip install -r requirements.txt
 ### 2. Run the full pipeline
 python code/main_pipeline.py
 
-### 3. Output Files
+Output Files
 
 Running the code generates all results automatically:
 
-### 4.Data
+Data
 
 data/dataset_instances.xlsx
 data/results_table.xlsx
 data/Table1_method_comparison.xlsx
 data/Table2_fleet_size.xlsx
 
-### 5.Figures
+Figures
 
 figures/figure2_convergence.png
 Figure 2. ALNS convergence (averaged across the six hard instances)
 figures/figure3_fleet_size.png
 Figure 3. Effect of robot fleet size on makespan (mean ± 95% confidence interval across 90 instances, cap = 1)
 
-### 6.Logs
+Logs
 
 logs/run_log.txt
 
-### 7.Experimental Design
+Experimental Design
 
 The instance set consists of 90 scenarios:
 Aisles: {10, 20, 40}
@@ -58,7 +58,7 @@ ALNS is applied to a subset of 6 challenging instances:
 medium/high density
 1000 items
 
-### 8.Key Parameters
+Key Parameters
 The results in the manuscript are generated with:
 AISLE_LEN = 20
 CAP = 1
@@ -67,7 +67,7 @@ BATCH_SIZE = 4
 V_PICK = 1.0
 V_ROB = 1.2
 
-### 9.Methods Compared
+Methods Compared
 Integrated (synchronization + congestion)
 NoCongestion
 NoSync
@@ -77,18 +77,18 @@ Performance metrics:
 Makespan
 Total robot waiting time
 
-### 10.Reproducibility
+Reproducibility
 
 All random seeds are fixed (MASTER_SEED = 123)
 The full pipeline (instance generation → simulation → ALNS → tables → figures) is deterministic
 All results can be reproduced by running a single script
 
-### 11.Notes
+Notes
 The model is simulation-based; no time-expanded MIP is solved
 ALNS is used as a refinement layer on top of the integrated solution
 Results highlight strong non-linear effects in robot fleet sizing due to congestion and synchronization
 
-### 12.Authors
+Authors
 
 Ahmet Bengöz
 NATO Support and Procurement Agency (NSPA), Luxembourg
