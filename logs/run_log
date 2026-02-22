@@ -1,4 +1,25 @@
+CMAS-CHR-OP Experiment Log
+
 Elapsed seconds: 815.67
-Instances: 90
-Hard subset (ALNS): 6
-ALNS iters: 1500
+Number of instances: 90
+ALNS hard subset size: 6
+ALNS iterations: 1500
+
+Experimental design:
+- Aisles: 10, 20, 40
+- Items: 200, 1000
+- Density levels: low, medium, high
+- Pickers: 2, 5, 10
+- Robots: 1, 3, 5, 10
+
+System parameters:
+- Aisle length (L): 20
+- Capacity (cap): 1 (narrow aisles)
+- Service time: 4
+- Robot speed multiplier: 1.2
+- Batch size: 4
+
+Notes:
+- Full event-based simulation with reservation and synchronization
+- ALNS applied on the six most challenging instances
+- All results are reproducible from the provided code
