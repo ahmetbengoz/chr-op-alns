@@ -1,9 +1,9 @@
 # ============================================
-# CMAS-CHR-OP — REAL PIPELINE (EJOR-STYLE)
+# CMAS-CHR-OP — REAL PIPELINE ()
 # - Event-based picker–robot synchronization (handover meetings)
 # - Time-expanded reservation (node+edge, cap=1) for congestion
 # - ALNS on decision variables (handover choices, robot assignment, robot routing)
-# - Benchmarks + Excel outputs + Figure 2 + Figure 3 (CI)
+# - Benchmarks + Excel outputs + Figure 2 + Figure 3 (CI) + sensitivity analysis
 # ============================================
 
 import os
@@ -523,6 +523,7 @@ class ALNSRunner:
 # RUN FULL EXPERIMENT
 # -----------------------------
 def main():
+    global instances
     instances = []
     iid = 0
 
@@ -726,3 +727,65 @@ def main():
 
 if __name__ == "__main__":
     main()
+# ==============================
+# SENSITIVITY ANALYSIS (ROBOT SPEED)
+# ==============================
+
+SPEED_LIST = [1.0, 1.2, 1.5]
+
+sens_results = []
+
+# sadece representative subset kullan
+sens_instances = instances[:10]   # hızlı olsun diye 10 instance
+
+for speed in SPEED_LIST:
+    print(f"Running sensitivity for V_ROB = {speed}")
+    
+    for inst in sens_instances:
+        for P in [5]:   # orta seviye picker (en anlamlı)
+            for R in R_LIST:
+                
+                # global robot speed override
+                global V_ROB
+                V_ROB_backup = V_ROB
+                V_ROB = speed
+                
+                sol = build_initial_solution(inst, P, R)
+                mk, tw, rw = simulate(inst, P, R, sol, sync=True, congestion=True)
+                
+                sens_results.append({
+                    "speed": speed,
+                    "pickers": P,
+                    "robots": R,
+                    "makespan": mk
+                })
+                
+                V_ROB = V_ROB_backup  # geri al
+
+sens_df = pd.DataFrame(sens_results)
+
+# -----------------------------
+# AGGREGATION
+# -----------------------------
+plt.figure()
+
+for speed in SPEED_LIST:
+    sub = sens_df[sens_df["speed"] == speed]
+    
+    agg = sub.groupby("robots")["makespan"].mean()
+    
+    plt.plot(
+        agg.index,
+        agg.values,
+        marker='o',
+        label=f"V = {speed}"
+    )
+
+plt.xlabel("Number of Robots")
+plt.ylabel("Makespan")
+plt.title("Sensitivity Analysis: Effect of Robot Speed on System Performance")
+plt.legend()
+plt.tight_layout()
+
+plt.savefig("figure_sensitivity_speed.png")
+plt.show()
