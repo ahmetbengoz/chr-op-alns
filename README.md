@@ -85,9 +85,11 @@ All results can be reproduced by running a single script
 
 ### Sensitivity analysis
 
-Additional experiments evaluating the effect of the scalarization parameter λ are provided in:
+Sensitivity analysis for the scalarization parameter λ used in the ALNS objective function is provided in:
 
-experiments/lambda_sensitivity/lambda_sensitivity.ipynb
+experiments/lambda_sensitivity/
+
+The notebook `lambda_sensitivity_ALNS.ipynb` reproduces the experiments reported in Section 5.1.
 
 ## Notes
 The model is simulation-based; no time-expanded MIP is solved
