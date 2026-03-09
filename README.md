@@ -83,6 +83,12 @@ All random seeds are fixed (MASTER_SEED = 123)
 The full pipeline (instance generation → simulation → ALNS → tables → figures) is deterministic
 All results can be reproduced by running a single script
 
+### Sensitivity analysis
+
+Additional experiments evaluating the effect of the scalarization parameter λ are provided in:
+
+experiments/lambda_sensitivity/lambda_sensitivity.ipynb
+
 ## Notes
 The model is simulation-based; no time-expanded MIP is solved
 ALNS is used as a refinement layer on top of the integrated solution
